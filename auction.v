@@ -1,6 +1,7 @@
 module auction #(parameter N = 2, W = 2)(
 	input [(2**N)*W-1:0] bid,
-	output [N-1:0] winner
+	output [N-1:0] winner,	
+	output [W-1:0] winning_bid
 	);
 	
 	genvar i;
@@ -40,8 +41,7 @@ module auction #(parameter N = 2, W = 2)(
 	end
 	endgenerate
 	
-	wire [W-1:0] highest;
-	assign highest = WV[N][0];
+	assign winning_bid = WV[N][0];
 	
 	assign winner[N-1] = WID[N-1][0];
 	
