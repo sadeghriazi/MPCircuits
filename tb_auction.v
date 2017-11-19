@@ -4,6 +4,7 @@ parameter N = 3, W = 3;
 
 wire [(2**N)*W-1:0] bid;
 wire [N-1:0] winner;
+wire [W-1:0] winning_bid;
 
 wire [W-1:0] B [2**N-1:0];
 genvar i;
@@ -23,7 +24,8 @@ assign B[7] = 2; //5
 
 auction #(.N(N), .W(W)) uut(
 	.bid(bid),
-	.winner(winner)
+	.winner(winner),
+	.winning_bid(winning_bid)
 );
 
 endmodule
