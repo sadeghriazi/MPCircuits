@@ -22,5 +22,6 @@ generate
     end
 endgenerate 
 
+assign all_output  = con_wire [(n-1)*b-1 : (n-2)*b];
 
 endmodule 
