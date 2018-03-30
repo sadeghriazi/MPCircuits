@@ -14,8 +14,9 @@ for n = 1:length(N)
         fprintf(fid_yos, 'opt;\n'); 
         fprintf(fid_yos, 'dfflibmap -liberty ../circuit_synthesis/lib/asic_cell_yosys_extended.lib\n'); 
         fprintf(fid_yos, 'abc -liberty ../circuit_synthesis/lib/asic_cell_yosys_extended.lib \n'); 
-        fprintf(fid_yos, 'opt; clean; opt;\n'); 
-        fprintf(fid_yos, ['write_verilog syn_yos/', bench, '_BMR_N_', num2str(N(n)), '_W_', num2str(W(w)), '_syn_yos.v\n\n']);
+        fprintf(fid_yos, 'opt; clean; opt;\n');  
+        fprintf(fid_yos, 'opt_clean -purge\n'); 
+        fprintf(fid_yos, ['write_verilog -noattr -noexpr syn_yos/', bench, '_BMR_N_', num2str(N(n)), '_W_', num2str(W(w)), '_syn_yos.v\n\n']);
         fclose(fid_yos);
     end
 end
