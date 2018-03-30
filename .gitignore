@@ -23,6 +23,7 @@ transcript
 *.wlf
 syn/
 syn/*
+syn_yos/
 work/
 work/*
 *.dis
@@ -30,4 +31,5 @@ work/*
 *.map
 *.mem
 *.hex
+*.yos
 a23/tools/amber-elfsplitter

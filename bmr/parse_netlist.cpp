@@ -17,7 +17,7 @@
 
 #include "parse_netlist.h"
 
-#include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>
 #include <fstream>
@@ -81,6 +81,7 @@ int ParseNetlist(const string &filename,
   bool is_inport = false;
   bool is_outport = false;
   bool endoffile = false;
+  bool comment = false;
 
   map<string, string> port;
   string port_key;
@@ -89,6 +90,18 @@ int ParseNetlist(const string &filename,
     CHECK_EXPR_MSG(fin.good(), "File is broken, no endmodule found.");
     string line = "";
     getline(fin, line);
+	
+	if(boost::algorithm::starts_with(line, "/*")) comment = true;
+	if(comment){
+		if(boost::algorithm::ends_with(line, "*/")) comment = false;
+		continue;
+	}	
+	if(boost::algorithm::contains(line, "(*")) comment = true;
+	if(comment){
+		if(boost::algorithm::contains(line, "*)")) comment = false;
+		continue;
+	}
+	
     char_separator<char> sep(" ,()\t\r", ";");
     tokenizer<char_separator<char> > tok(line, sep);
     BOOST_FOREACH(string str, tok){
