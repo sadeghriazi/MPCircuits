@@ -2,10 +2,10 @@
 
 module stable_matching
 #(
-	parameter Kr =10,   //number of preferences for list B
-	parameter Ks =10,   //number of preferences for list A
-	parameter S  =10,   //number of members in list A
-	parameter R  =10    //number of members in list B
+	parameter Kr = 10,   //number of preferences for list B
+	parameter Ks = Kr,   //number of preferences for list A
+	parameter S  = 10,   //number of members in list A
+	parameter R  = S    //number of members in list B
 )
 (
 	g,

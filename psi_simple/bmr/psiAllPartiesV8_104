@@ -1,0 +1,10 @@
+xterm -hold -e "./BMRPassive.out -1 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 1 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 2 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 3 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 4 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 5 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 6 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 7 3Party/psi_BMR_8_10000.txt 3Party/psi_p0 parties 43739841701238781571456410093f43 0" 
+
+echo "Finished"

@@ -1,0 +1,19 @@
+xterm -hold -e "./BMRPassive.out -1 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 1 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 2 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 3 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 4 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 5 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 6 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 7 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 8 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 9 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 10 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 11 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 12 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 13 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 14 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 15 3Party/auction_BMR_4_32.txt 3Party/auctionP1 parties 43739841701238781571456410093f43 0" 
+
+
+echo "Finished"
