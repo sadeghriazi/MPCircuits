@@ -51,8 +51,6 @@ void LogInitial(int argc, char *argv[]) {
   string dump_directory;
   po::options_description desc("");
   desc.add_options()  //
-  ("alice,a", "")  //
-  ("bob,b", "")  //
   ("dump_directory", po::value<string>(&dump_directory), "")  //
   ("error2std", "")  //
   ("log2std", "");

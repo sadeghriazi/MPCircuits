@@ -23,9 +23,9 @@
 #include <string>
 #include <new>
 #include <string.h>
-
-
 #include "common.h"
+
+#define ENABLE_LOG
 
 using std::ostream;
 using std::string;
