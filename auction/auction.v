@@ -58,20 +58,5 @@ module auction #(parameter N = 2, W = 2)(
 	
 endmodule
 
-module auction_BMR 
-#
-(
-	parameter N = 2, 
-	parameter W = 2
-) 
-(
-	input [(2**N)*W-1:0] p_input,
-	output [N+W-1:0] o
-);
-
-auction #(.N(N), .W(W)) auction_ (.bid(p_input),.winning_bid(o[N+W-1:N]),.winner(o[N-1:0]));
-
-endmodule 
-
 
 

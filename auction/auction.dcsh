@@ -1,0 +1,27 @@
+set search_path [list . ../circuit_synthesis/lib/dff_full/]
+set target_library ../circuit_synthesis/lib/dff_full/dff_full.db
+set link_library ../circuit_synthesis/lib/dff_full/dff_full.db
+set symbol_library [concat ../circuit_synthesis/lib/generic.sdb]
+set hdlin_while_loop_iterations 2049
+
+analyze -format verilog {../circuit_synthesis/syn_lib/*.v}
+
+
+analyze -format verilog {auction_BMR.v auction.v primitives.v}
+
+foreach N {2 3 4} {
+foreach W {16 32} {
+elaborate auction_BMR -architecture verilog -library DEFAULT -update -parameters $N,$W
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure -design * false
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all  -map_effort low -area_effort low -no_design_rule
+set verilogout_no_tri true
+set_fix_multiple_port_nets -all -buffer_constants
+write -hierarchy -format verilog -output syn/auction_syn_$N\_$W.v
+}
+}
+
+exit
