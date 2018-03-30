@@ -1,0 +1,4 @@
+xterm -hold -e "./BMRPassive.out -1 3Party/voting_BMR_1_4.txt 3Party/votingP1 parties 43739841701238781571456410093f43 0" &
+xterm  -e "./BMRPassive.out 1 3Party/voting_BMR_1_4.txt 3Party/votingP1 parties 43739841701238781571456410093f43 0" 
+
+echo "Finished"
