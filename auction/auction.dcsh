@@ -4,7 +4,7 @@ set link_library ../circuit_synthesis/lib/dff_full/dff_full.db
 set symbol_library [concat ../circuit_synthesis/lib/generic.sdb]
 set hdlin_while_loop_iterations 2049
 
-analyze -format verilog {../circuit_synthesis/syn_lib/*.v}
+analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/syn_lib/ADD.v ../circuit_synthesis/syn_lib/MULT.v ../circuit_synthesis/syn_lib/SUB.v ../circuit_synthesis/syn_lib/COMP.v ../circuit_synthesis/syn_lib/MUX.v ../circuit_synthesis/syn_lib/COUNT.v}
 
 
 analyze -format verilog {auction_BMR.v auction.v primitives.v}

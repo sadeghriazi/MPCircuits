@@ -1,6 +1,6 @@
 module DupSelect_3 
 	#(
-		parameter W
+		parameter W = 2
 	)
 	(
 		dup_in,
@@ -35,7 +35,7 @@ endmodule
 
 module DupSelect_2 
 	#(
-		parameter W
+		parameter W = 2
 	)
 	(
 		dup_in,
@@ -66,8 +66,8 @@ endmodule
 
 module Dup
 	#(
-		parameter W,
-		parameter K      //must be power of 2
+		parameter W = 2,
+		parameter K = 2      //must be power of 2
 	)
 	(
 		in_array,
@@ -89,9 +89,9 @@ endmodule
 
 module psi
 	#(
-		parameter W,   // bit width of each of the array elements
-		parameter K,   // length of each array, must be even
-		parameter N    // number of parties, must be power of 2
+		parameter W = 2,   // bit width of each of the array elements
+		parameter K = 2,   // length of each array, must be even
+		parameter N = 2   // number of parties, must be power of 2
 	)
 	(
 		p_input,
@@ -124,11 +124,13 @@ module psi
 
 	genvar i, j, k;
 	generate
-		for (i=0; i<K; i=i+1) 
-			for (j=0; j<N/2; j=j+1)
-				for (k=0; k<LOGN; k=k+1)
+		for (i=0; i<K; i=i+1) begin
+			for (j=0; j<N/2; j=j+1) begin
+				for (k=0; k<LOGN; k=k+1) begin
 					assign array2_t[k][j][(i+1)*W-1:i*W] = array2[k][j][(K-i)*W-1:(K-i-1)*W];
-		
+				end
+			end
+		end		
 	endgenerate
 
 	generate
@@ -150,40 +152,3 @@ module psi
 	assign o = out_sort[LOGN][W*K-1:0];
 
 endmodule
-
-	// // wire [W-1:0] in_array [N-1:0][K-1:0];
-	// wire [W*K*N/2-1:0] psi_1_in; 
-	// wire [0:W*K*N/2-1] psi_2_in; 
-
-	// assign psi_1_in = p_input[W*K*N/2-1:0];
-	// assign psi_2_in = p_input[W*K*N-1:W*K*N/2];
-
-	// wire [W*K-1:0] psi_1_o;
-	// wire [W*K-1:0] psi_2_o;
-
-	// wire [W*K*2-1:0] o_bitonic_merge;
-
-	// // generate
-	// // 	for (i=0; i<N; i=i+1) begin
-	// // 		for (j=0; j<K; j=j+1) begin
-	// // 			assign in_array[i][j] = p_input[i*K*W+j*W+W-1:i*K*W+j*W];
-	// // 		end
-	// // 	end
-	// // endgenerate
-
-	// generate
-	// 	localparam n = N/2;
-	// 	if (n > 1) begin
-	// 		psi #(.W(W), .K(K), .N(n)) psi_1 (.p_input(psi_1_in), .o(psi_1_o));
-	// 		psi #(.W(W), .K(K), .N(n)) psi_2 (.p_input(psi_2_in), .o(psi_2_o));
-	// 	end
-	// 	else begin
-	// 		bitonic_merge #(.W(W), .K(K)) bitonic_merge_ 
-	// 						(.in_array({psi_1_in, psi_2_in}), .dir(1'b1), .out_array(o_bitonic_merge));   //perform ascending merge
-
-	// 		Dup3
-
-	// 		bitonic_sort 
-	// endgenerate
-
-	// assign o = (n > 1) ? 

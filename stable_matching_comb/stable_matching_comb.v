@@ -3,9 +3,9 @@
 module stable_matching
 #(
 	parameter Kr = 10,   //number of preferences for list B
-	parameter Ks = Kr,   //number of preferences for list A
+	parameter Ks = 10,   //number of preferences for list A
 	parameter S  = 10,   //number of members in list A
-	parameter R  = S    //number of members in list B
+	parameter R  = 10    //number of members in list B
 )
 (
 	g,
@@ -189,9 +189,9 @@ endmodule
 module stable_matching_comb
 #(
 	parameter Kr =10,   //number of preferences for list B
-	parameter Ks =10,   //number of preferences for list A
+	parameter Ks =Kr,   //number of preferences for list A
 	parameter S  =10,   //number of members in list A
-	parameter R  =10,   //number of members in list B
+	parameter R  =S,   //number of members in list B
 	parameter N = S*S-S+2    //number of iterations
 )
 (

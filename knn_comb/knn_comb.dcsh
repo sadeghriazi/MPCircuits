@@ -1,0 +1,29 @@
+set search_path [list . ../circuit_synthesis/lib/dff_full/]
+set target_library ../circuit_synthesis/lib/dff_full/dff_full.db
+set link_library ../circuit_synthesis/lib/dff_full/dff_full.db
+set symbol_library [concat ../circuit_synthesis/lib/generic.sdb]
+set hdlin_while_loop_iterations 2049
+
+analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/syn_lib/ADD.v ../circuit_synthesis/syn_lib/MULT.v ../circuit_synthesis/syn_lib/SUB.v ../circuit_synthesis/syn_lib/COMP.v ../circuit_synthesis/syn_lib/MUX.v ../circuit_synthesis/syn_lib/COUNT.v}
+
+
+analyze -format verilog {knn_comb_BMR.v knn_comb.v}
+
+foreach K {1 2 3} {
+foreach N {8 16} {
+foreach W {32} {
+elaborate knn_comb_BMR -architecture verilog -library DEFAULT -update -parameters $W,$K,$N
+set_max_area -ignore_tns 0 
+set_flatten false -design *
+set_structure -design * false
+set_resource_allocation area_only
+report_compile_options
+compile -ungroup_all  -map_effort low -area_effort low -no_design_rule
+set verilogout_no_tri true
+set_fix_multiple_port_nets -all -buffer_constants
+write -hierarchy -format verilog -output syn/knn_comb_syn_$W\_$K\_$N.v
+}
+}
+}
+
+exit

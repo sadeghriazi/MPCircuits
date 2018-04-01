@@ -146,9 +146,9 @@ endmodule
 
 module knn_comb
 #(
-	parameter W = 8,
-	parameter K = 2,
-	parameter N = 4
+	parameter W = 8,  //bit width
+	parameter K = 2,  //number of nearest neighbors
+	parameter N = 4   //number of parties
 )
 (
 	p0_input,
@@ -203,21 +203,5 @@ module knn_comb
 	
 	assign o = min_val_out[N-1];
 
-
 endmodule
-
-module knn_comb_BMR
-#(
-	parameter W = 8,
-	parameter K = 2,
-	parameter N = 4
-)
-(
-	p_input,
-	o
-);
-	input [(N+1)*W-1:0] p_input,
-	output [N+W-1:0] o;
-
-	knn_comb #(.W(W), .K(K), .N(N)) knn_comb_ (.p0_input(p_input[(N+1)*W-1:N*W]),.p1_input(p_input[N*W-1:0]), .o(o));
 

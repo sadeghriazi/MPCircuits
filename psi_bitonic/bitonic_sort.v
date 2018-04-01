@@ -1,6 +1,6 @@
 module compare_swap
 	#(
-		parameter W
+		parameter W = 2
 	)
 	(
 		a1, a2,
@@ -26,8 +26,8 @@ endmodule
 
 module bitonic_merge
 	#(
-		parameter W,
-		parameter K
+		parameter W = 2,
+		parameter K = 3
 	)
 	(
 		in_array,
@@ -78,8 +78,8 @@ endmodule
 
 module bitonic_sort
 	#(
-		parameter W,
-		parameter K
+		parameter W = 2,
+		parameter K = 2
 	)
 	(
 		in_array,

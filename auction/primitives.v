@@ -21,8 +21,9 @@ module mod_mux #(parameter N = 3)(
 	wire [2**N-1:0] AA[N:0];
 		
 	generate
-	for (k = 0; k < 2**N; k = k + 1)
+	for (k = 0; k < 2**N; k = k + 1) begin
 		assign AA[0][k] = A[k];
+	end
 	endgenerate
 	
 	generate

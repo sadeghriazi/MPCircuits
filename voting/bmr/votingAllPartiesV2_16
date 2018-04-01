@@ -1,4 +1,18 @@
-xterm -hold -e "./BMRPassive.out -1 3Party/voting_BMR_1_4.txt 3Party/votingP1 parties 43739841701238781571456410093f43 0" &
-xterm  -e "./BMRPassive.out 1 3Party/voting_BMR_1_4.txt 3Party/votingP1 parties 43739841701238781571456410093f43 0" 
+xterm -hold -e "../../Semi-Honest-BMR/BMRPassive.out 0 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 1 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 2 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 3 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 4 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 5 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 6 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 7 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 8 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 9 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 10 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 11 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 12 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 13 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 14 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm -e "../../Semi-Honest-BMR/BMRPassive.out 15 3Party/voting_BMR_1_4.txt 3Party/votingP0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" 
 
 echo "Finished"
