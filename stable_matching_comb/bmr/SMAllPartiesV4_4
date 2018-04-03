@@ -1,0 +1,10 @@
+xterm -hold -e "../../Semi-Honest-BMR/BMRPassive.out 0 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 1 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 2 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 3 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 4 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 5 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 6 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" &
+xterm  -e "../../Semi-Honest-BMR/BMRPassive.out 7 3Party/SM_BMR_4_4.txt 3Party/SM_P0 ../../Semi-Honest-BMR/parties 43739841701238781571456410093f43 0" 
+
+echo "Finished"

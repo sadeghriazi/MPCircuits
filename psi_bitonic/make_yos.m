@@ -1,8 +1,8 @@
 bench = 'psi';
 
-N = [32];
-W = [16];
-K = [10];
+N = [4 8 16];
+W = [16 32 64];
+K = [16];
 
 for n = 1:length(N)
     for w = 1:length(W)

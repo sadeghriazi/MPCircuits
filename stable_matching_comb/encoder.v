@@ -15,12 +15,10 @@ module encoder
 	wire [logS-1:0] out1;
 	
 	generate 
-		if(logS == 1)
-		begin
+		if(logS == 1)begin : if_out
 			assign out = in[1];
 		end
-		else
-		begin
+		else begin : else_out
 			encoder 
 			#(
 				.logS(logS-1)

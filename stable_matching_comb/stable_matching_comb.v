@@ -2,10 +2,10 @@
 
 module stable_matching
 #(
-	parameter Kr = 10,   //number of preferences for list B
-	parameter Ks = 10,   //number of preferences for list A
-	parameter S  = 10,   //number of members in list A
-	parameter R  = 10    //number of members in list B
+	parameter Kr =10,   //number of preferences for list B
+	parameter Ks =10,   //number of preferences for list A
+	parameter S  =10,   //number of members in list A
+	parameter R  =10    //number of members in list B
 )
 (
 	g,
@@ -59,7 +59,7 @@ module stable_matching
 	output wire [logS-1:0] s1;
 	output wire [SRounded-1:0] encoderInput;
 	output wire [logS-1:0] encoderOutput;
-	output wire [R*logS:0] o;
+	output wire [R*logS-1:0] o;
 	
 	wire [R*Kr*logS-1:0] rPref;   //preference list for all members of r
 	wire [S*Ks*logR-1:0] sPref;   //preference list for all members of s
@@ -91,8 +91,8 @@ module stable_matching
 	genvar i,j;
 
 	generate
-		for (i=0;i<R;i=i+1)begin : matchlistmat_asgn1
-			for (j=0;j<logS;j=j+1) begin : matchlistmat_asgn2
+		for (i=0;i<R;i=i+1)begin : for_matchListMatrix1
+			for (j=0;j<logS;j=j+1)begin : for_matchListMatrix2
 				assign matchListMatrix[i][j] = matchListMatrix_array[logS*i+j];
 			end
 		end
@@ -100,7 +100,7 @@ module stable_matching
 
 	generate
 		for (i=0;i<S;i=i+1)begin : pc_asgn1
-			for (j=0;j<log2(Ks+1);j=j+1) begin : pc_asgn2
+			for (j=0;j<log2(Ks+1);j=j+1)begin : pc_asgn2
 				assign pc[i][j] = pc_array[log2(Ks+1)*i+j];
 			end
 		end
@@ -108,7 +108,7 @@ module stable_matching
 	
 	generate  //[0]
 		for (i=0;i<R;i=i+1)begin : rPref_asgn1
-			for (j=0;j<Kr;j=j+1) begin : rPref_asgn2
+			for (j=0;j<Kr;j=j+1)begin : rPref_asgn2
 				assign rPrefMatrix[i][j] = rPref[logS*Kr*i + logS*(j+1) -1 : logS*Kr*i + logS*j];
 			end
 		end
@@ -116,7 +116,7 @@ module stable_matching
 	
 	generate //[0]
 		for (i=0;i<S;i=i+1)begin : sPref_asgn1
-			for (j=0;j<Ks;j=j+1) begin : sPref_asgn2
+			for (j=0;j<Ks;j=j+1)begin : sPref_asgn2
 				assign sPrefMatrix[i][j] = sPref[logR*Ks*i + logR*(j+1) -1 : logR*Ks*i + logR*j];
 			end
 		end
@@ -134,10 +134,10 @@ module stable_matching
 			assign s2Compare[i]= ~|(s2^rPrefMatrix [r][i]) ;		// [1]
 			
 			assign wireXOR1 [i] = s1Compare [i] ^ s2Compare [i];		// [2]
-			if (i==0) begin
+			if (i==0)begin : if_wireOR1
 				assign wireOR1 [i] = wireXOR1[i];
 				assign wireAND1 [i] = wireOR1[i];
-			end else begin
+			end else begin 
 				assign wireOR1 [i] = wireXOR1[i] | wireOR1[i-1];
 				assign wireAND1 [i] = ~wireOR1 [i-1] & wireXOR1[i];
 			end
@@ -153,16 +153,16 @@ module stable_matching
 	assign s2=s;
 	assign finish=finishAND;
 	assign propose= |pcS & ~sIsMatch[s];
-	assign r=sPrefMatrix[s][Ks-pcS];
+	assign r = (pcS==0) ? sPrefMatrix[s][Ks-pcS-1] : sPrefMatrix[s][Ks-pcS];
 	
 	assign rPref[R*Kr*logS-1:0] = g[R*Kr*logS-1  :0] ;
 	assign sPref[S*Ks*logR-1:0] = g[R*Kr*logS-1 + S*Ks*logR-1  + 1: R*Kr*logS-1  + 1 ] ;
-	assign o[R*logS]=finish;
-	assign o[R*logS-1:0]=matchList[R*logS-1:0];
+	// assign o[R*logS]=finish;
+	assign o[R*logS-1:0] = matchList[R*logS-1:0];
 
 	
 	generate // choose who to propose next 
-		for (i=0;i<SRounded;i=i+1) begin :propose_asgn
+		for (i=0;i<SRounded;i=i+1)begin : propose_asgn
 			if (i<S) begin
 				assign canPropose[i] = |pc[i] & ~sIsMatch[i] & ~sIsRunning[i];
 			end else begin
@@ -189,10 +189,10 @@ endmodule
 module stable_matching_comb
 #(
 	parameter Kr =10,   //number of preferences for list B
-	parameter Ks =Kr,   //number of preferences for list A
+	parameter Ks =10,   //number of preferences for list A
 	parameter S  =10,   //number of members in list A
-	parameter R  =S,   //number of members in list B
-	parameter N = S*S-S+2    //number of iterations
+	parameter R  =10,   //number of members in list B
+	parameter N = (S==Ks) ? S*S-S+2 : S*Ks    //number of iterations
 )
 (
 	p_input,
@@ -219,7 +219,7 @@ module stable_matching_comb
 	localparam SRounded = 2**logS;
 
 input wire [R*Kr*logS-1 + S*Ks*logR-1  + 1:0]  p_input;
-output wire [R*logS:0] o;
+output wire [R*logS-1:0] o;
 
 reg [log2(Ks+1)-1:0] pc [N-1:0][S-1:0]; //proposal counts
 reg [logR-1:0] sInMatch [N-1:0][S-1:0];
@@ -235,24 +235,35 @@ reg [logR-1:0] r [N-1:0];
 reg [logS-1:0] s1 [N-1:0];
 reg [SRounded-1:0] encoderInput [N-1:0];
 reg [logS-1:0] encoderOutput [N-1:0];
-reg [R*logS:0] o_interm [N-1:0];
+reg [R*logS-1:0] o_interm [N-1:0];
 wire [logS*R-1:0] matchListMatrix_array [N-1:0];
 wire [log2(Ks+1)*S-1:0] pc_array [N-1:0];
 
-integer p, i, j, n;
+integer p, i, n;
 
-initial begin
-	s[0] = 0;
-	sIsRunning[0] = 1;
-	finishAND[0] = 0;
+wire [logS-1:0] s0;
+assign s0 = {logS{1'b0}};
+wire [S-1:0] sIsRunning0;
+assign sIsRunning0 = {{S-1{1'b0}},{1'b1}};
+wire finishAND0;
+assign finishAND0 = 0;
+wire [log2(Ks+1)-1:0] pc0;
+assign pc0 = Ks;
+wire [logR-1:0] sInMatch0;
+assign sInMatch0 = {logR{1'b0}};
+
+always@* begin
+	s[0] = s0;
+	sIsRunning[0] = sIsRunning0;
+	finishAND[0] = finishAND0;
 	for(p=0; p<R; p=p+1) begin
-		rIsMatch[0][p] = 1'b0;
-		matchListMatrix [0][p] = 0;
+		rIsMatch[0][p] = finishAND0;
+		matchListMatrix [0][p] = s0;
 	end
 	for(p=0; p<S; p=p+1) begin
-		pc[0][p] = Ks;
-		sIsMatch[0][p] = 1'b0;
-		sInMatch[0][p] = 0;
+		pc[0][p] = pc0;
+		sIsMatch[0][p] = finishAND0;
+		sInMatch[0][p] = sInMatch0;
 	end
 end
 
@@ -262,10 +273,18 @@ wire [logR-1:0] r_wire [N-1:0];
 wire [logS-1:0] s1_wire [N-1:0];
 wire [SRounded-1:0] encoderInput_wire [N-1:0];
 wire [logS-1:0] encoderOutput_wire [N-1:0];
-wire [R*logS:0] o_interm_wire [N-1:0];
+wire [R*logS-1:0] o_interm_wire [N-1:0];
+
+assign propose_wire[0] = {N{1'b0}};
+assign better_wire[0] = {N{1'b0}};
+assign r_wire[0] = {logR{1'b0}};
+assign s1_wire [0] = {logS{1'b0}};
+assign encoderInput_wire[0] = {SRounded{1'b0}};
+assign encoderOutput_wire[0] = {logS{1'b0}};
+assign o_interm_wire[0] = {(R*logS-1){1'b0}};
 
 always @* begin
-	for(n=1; n<N; n=n+1) begin
+	for(n=0; n<N; n=n+1) begin
 		propose[n] = propose_wire[n];
 		better[n] = better_wire[n];
 		r[n] = r_wire[n];
@@ -280,16 +299,18 @@ always @* begin
 	for(n=1; n<N; n=n+1) begin
 		if (propose[n]) begin
 			for (i=0; i<S; i=i+1) begin
-				if (i==s[n-1])
-					pc[n][s[n-1]] = pc[n-1][s[n-1]] - 1;
-				else
+				if (i==s[n-1]) begin
+					pc[n][i] = pc[n-1][i] - 1;
+				end
+				else begin
 					pc[n][i] = pc[n-1][i];
+				end
 			end
 			if (rIsMatch[n-1][r[n]]==0) begin
 				for (i=0; i<R; i=i+1) begin
 					if (i == r[n]) begin
-						matchListMatrix[n][r[n]] = s[n-1]; // assign them together
-						rIsMatch[n][r[n]] = 1'b1;
+						matchListMatrix[n][i] = s[n-1]; // assign them together
+						rIsMatch[n][i] = 1'b1;
 					end
 					else begin
 						matchListMatrix[n][i] = matchListMatrix[n-1][i];
@@ -298,8 +319,8 @@ always @* begin
 				end
 				for (i=0; i<S; i=i+1) begin
 					if (i == s[n-1]) begin
-						sInMatch[n][s[n-1]] = r[n];
-						sIsMatch[n][s[n-1]] = 1'b1;
+						sInMatch[n][i] = r[n];
+						sIsMatch[n][i] = 1'b1;
 					end
 					else begin
 						sInMatch[n][i] = sInMatch[n-1][i];
@@ -308,23 +329,26 @@ always @* begin
 				end				
 			end 
 			else begin // if r is already matched 
-				for (i=0; i<R; i=i+1)
+				for (i=0; i<R; i=i+1) begin
 					rIsMatch[n][i] = rIsMatch[n-1][i];
+				end
 
 				if	(better[n]) begin
 					for (i=0; i<R; i=i+1) begin
-						if (i == r[n])
-							matchListMatrix[n][r[n]] = s[n-1]; // assign them together
-						else
+						if (i == r[n]) begin
+							matchListMatrix[n][i] = s[n-1]; // assign them together
+						end
+						else begin
 							matchListMatrix[n][i] = matchListMatrix[n-1][i];
+						end
 					end
 					for (i=0; i<S; i=i+1) begin
 						if (i == s[n-1]) begin
-							sInMatch[n][s[n-1]] = r[n];
-							sIsMatch[n][s[n-1]] = 1'b1;
+							sInMatch[n][i] = r[n];
+							sIsMatch[n][i] = 1'b1;
 						end
 						else if (i == s1[n]) begin
-							sIsMatch[n][s1[n]] = 1'b0;	
+							sIsMatch[n][i] = 1'b0;	
 							sInMatch[n][i] = sInMatch[n-1][i];
 						end
 						else begin
@@ -334,8 +358,9 @@ always @* begin
 					end
 				end
 				else begin
-					for (i=0; i<R; i=i+1)
+					for (i=0; i<R; i=i+1) begin
 						matchListMatrix[n][i] = matchListMatrix[n-1][i];
+					end
 					for (i=0; i<S; i=i+1) begin
 						sIsMatch[n][i] = sIsMatch[n-1][i];
 						sInMatch[n][i] = sInMatch[n-1][i];
@@ -344,8 +369,9 @@ always @* begin
 			end
 		end
 		else begin
-			for (i=0; i<S; i=i+1)
+			for (i=0; i<S; i=i+1) begin
 				pc[n][i] = pc[n-1][i];
+			end
 			for (i=0; i<R; i=i+1) begin
 				matchListMatrix[n][i] = matchListMatrix[n-1][i];
 				rIsMatch[n][i] = rIsMatch[n-1][i];
@@ -357,18 +383,29 @@ always @* begin
 		end
 
 		for (i=0; i<S; i=i+1) begin
-			if (i == s[n-1])
-				sIsRunning[n][s[n-1]]=0;
-			else if (i != encoderOutput[n])
+			if (i == s[n-1]) begin
+				sIsRunning[n][i]=0;
+			end
+			else if (i == encoderOutput[n]) begin
+				if (encoderInput[n][encoderOutput[n]] == 1) begin
+					sIsRunning[n][i] = 1;
+				end
+				else begin
+					sIsRunning[n][i] = sIsRunning[n-1][i];
+				end
+			end
+			else begin
 				sIsRunning[n][i] = sIsRunning[n-1][i];
+			end
+
 		end
 
-		if (encoderInput[n][encoderOutput[n]] == 1) begin
-			sIsRunning[n][encoderOutput[n]] = 1;
+		if (encoderInput[n][encoderOutput[n]] == 1) begin //check this if statement with the previous for loop
+			// sIsRunning[n][encoderOutput[n]] = 1;
 			s[n] = encoderOutput[n];
 		end
 		else begin
-			sIsRunning[n][encoderOutput[n]] = sIsRunning[n-1][encoderOutput[n]];
+			// sIsRunning[n][encoderOutput[n]] = sIsRunning[n-1][encoderOutput[n]];   
 			s[n] = s[n-1];
 		end
 
@@ -378,18 +415,20 @@ always @* begin
 	end
 end
 
+localparam log2_KsP1 = log2(Ks+1);
+
 genvar v, k, l;
 generate
-	for (v=0; v<N; v=v+1) begin : arraykoni
+	for (v=0; v<N; v=v+1)begin : arraykoni
 		for (k=0;k<R;k=k+1)begin : matchlistmat_asgn1
 			for (l=0;l<logS;l=l+1) begin : matchlistmat_asgn2
 				assign matchListMatrix_array[v][logS*k+l] = matchListMatrix[v][k][l];
 			end
 		end
 	
-		for (k=0;k<S;k=k+1)begin : pc_asgn1
-			for (l=0;l<log2(Ks+1);l=l+1) begin : pc_asgn2
-				assign pc_array[v][log2(Ks+1)*k+l] = pc[v][k][l];
+		for (k=0;k<S;k=k+1)begin : pc_array_for1
+			for (l=0;l<log2(Ks+1);l=l+1)begin : pc_array_for2
+				assign pc_array[v][log2_KsP1*k+l] = pc[v][k][l];
 			end
 		end
 	end
