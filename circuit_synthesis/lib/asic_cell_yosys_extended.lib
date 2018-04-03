@@ -17,13 +17,13 @@ library(demo) {
 		pin(Z) { direction: output; function: "(A^B)'"; }
 	}	
 	cell(NOR) {
-		area: 5;
+		area: 100;
 		pin(A) { direction: input; }
 		pin(B) { direction: input; }
 		pin(Z) { direction: output; function: "(A+B)'"; }
 	}		
 	cell(AND) {
-		area: 5;
+		area: 100;
 		pin(A) { direction: input; }
 		pin(B) { direction: input; }
 		pin(Z) { direction: output; function: "(A&B)"; }
