@@ -436,7 +436,7 @@ endgenerate
 
 genvar m;
 generate
-	for(m=1; m<N; m=m+1) begin
+	for(m=1; m<N; m=m+1) begin : hello
 		stable_matching #(.Kr(Kr), .Ks(Ks), .S(S), .R(R)) stable_matching_ (
 							.g(p_input),
 							.pc_array(pc_array[m-1]),
