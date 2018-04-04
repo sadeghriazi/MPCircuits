@@ -1,7 +1,7 @@
 bench = 'stable_matching_comb';
 
-Ks = [4, 6, 8, 12];
-S = [4, 6, 8, 12];
+Ks = [16, 32];
+S = [8];
 
 for k = 1:length(Ks)
     for s = 1:length(S)
@@ -10,7 +10,8 @@ for k = 1:length(Ks)
         fprintf(fid_yos, 'read_verilog *.v\n\n');
         fprintf(fid_yos, ['hierarchy -check -top ', bench, '_BMR_', num2str(Ks(k)), '_', num2str(S(s)), '\n']); 
         fprintf(fid_yos, 'proc; opt; flatten; opt; \n'); 
-        fprintf(fid_yos, 'techmap -map ../circuit_synthesis/lib/stdcells_S.v; opt;\n'); 
+%         fprintf(fid_yos, 'techmap -map ../circuit_synthesis/lib/stdcells_S.v; opt;\n'); 
+        fprintf(fid_yos, 'techmap ; opt;\n'); 
         fprintf(fid_yos, 'abc -liberty ../circuit_synthesis/lib/asic_cell_yosys_extended.lib -script ../circuit_synthesis/lib/script.abc; opt;\n'); 
         fprintf(fid_yos, 'clean; opt;\n');  
         fprintf(fid_yos, 'opt_clean -purge\n'); 
