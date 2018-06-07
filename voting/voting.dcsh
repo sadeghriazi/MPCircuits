@@ -9,8 +9,8 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 analyze -format verilog {voting_BMR.v voting.v primitives.v}
 
-foreach N {1 2 3} {
-foreach M {3 4} {
+foreach N {2} {
+foreach M {2 3 4} {
 elaborate voting_BMR -architecture verilog -library DEFAULT -update -parameters $N,$M
 set_max_area -ignore_tns 0 
 set_flatten false -design *

@@ -10,7 +10,7 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 analyze -format verilog {auction_BMR.v auction.v primitives.v}
 
 foreach N {2 3 4} {
-foreach W {16 32} {
+foreach W {32} {
 elaborate auction_BMR -architecture verilog -library DEFAULT -update -parameters $N,$W
 set_max_area -ignore_tns 0 
 set_flatten false -design *

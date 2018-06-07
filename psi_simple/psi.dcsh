@@ -9,8 +9,8 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 analyze -format verilog {psi_BMR.v psi.v}
 
-foreach N {4 8} {
-foreach W {10000 100000} {
+foreach N {4 8 16} {
+foreach W {10000} {
 elaborate psi_BMR -architecture verilog -library DEFAULT -update -parameters $W,$N
 set_max_area -ignore_tns 0 
 set_flatten false -design *

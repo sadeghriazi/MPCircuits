@@ -9,8 +9,8 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 analyze -format verilog {knn_comb_BMR.v knn_comb.v}
 
-foreach K {1 2 3} {
-foreach N {8 16} {
+foreach K {3} {
+foreach N {4 8 16} {
 foreach W {32} {
 elaborate knn_comb_BMR -architecture verilog -library DEFAULT -update -parameters $W,$K,$N
 set_max_area -ignore_tns 0 
