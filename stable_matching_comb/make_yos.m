@@ -1,6 +1,12 @@
 bench = 'stable_matching_comb';
 
-Ks = [16, 32];
+%Ks == m, S == n/2
+
+%m = 2, 4, n = 8
+%m = 3, 6, n = 12
+%m = 4, 8, n = 16
+
+Ks = [4, 8];
 S = [8];
 
 for k = 1:length(Ks)

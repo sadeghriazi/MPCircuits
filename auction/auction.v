@@ -1,4 +1,4 @@
-module auction #(parameter N = 2, W = 2)(
+module auction #(parameter N = 2, W = 2)( //b = W, n = 2^N
 	input [(2**N)*W-1:0] bid,
 	output [N-1:0] winner,
 	output [W-1:0] winning_bid

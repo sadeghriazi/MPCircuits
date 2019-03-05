@@ -1,17 +1,17 @@
-// module voting_BMR 
-// #
-// (
-// 	parameter N = 2, //log2 of number of candidates
-// 	parameter M = 2  //log2 of number of voters
-// ) 
-// (
-// 	input [(2**M)*N-1:0] p_input,
-// 	output [N-1:0] o
-// );
+module voting_BMR 
+#
+(
+	parameter N = 2, //log2 of number of candidates
+	parameter M = 2  //log2 of number of voters
+) 
+(
+	input [(2**M)*N-1:0] p_input,
+	output [N-1:0] o
+);
 
-// voting #(.N(N), .M(M)) voting_ (.vote(p_input),.winner(o));
+voting #(.N(N), .M(M)) voting_ (.vote(p_input),.winner(o));
 
-// endmodule
+endmodule
 
 module voting_BMR_1_3
 #

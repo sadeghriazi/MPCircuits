@@ -9,6 +9,8 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 analyze -format verilog {psi_BMR.v psi.v bitonic_sort.v}
 
+//W=b, N=n, K=16
+
 foreach N {4 8 16} {
 foreach W {16} {
 foreach K {16} {

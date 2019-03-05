@@ -1,16 +1,16 @@
-// module psi_BMR
-// 	#(
-// 		parameter W = 32,   // bit width of each of the array elements
-// 		parameter K = 160,   // length of each array, must be even
-// 		parameter N = 1624    // number of parties, must be power of 2
-// 	)
-// 	(
-// 		input [W*K*N-1:0] p_input,  // input of each user is ascending
-// 		output [W*K-1:0] o
-// 	);
-// 	psi #(.N(N), .W(W), .K(K)) psi_ (.p_input(p_input), .o(o));
+module psi_BMR //W=b, N=n, K=16
+	#(
+		parameter W = 32,   // bit width of each of the array elements
+		parameter K = 160,   // length of each array, must be even
+		parameter N = 1624    // number of parties, must be power of 2
+	)
+	(
+		input [W*K*N-1:0] p_input,  // input of each user is ascending
+		output [W*K-1:0] o
+	);
+	psi #(.N(N), .W(W), .K(K)) psi_ (.p_input(p_input), .o(o));
 
-// endmodule
+endmodule
 
 module psi_BMR_16_16_4
 	#(

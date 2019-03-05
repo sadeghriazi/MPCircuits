@@ -9,6 +9,8 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 analyze -format verilog {knn_comb_BMR.v knn_comb.v}
 
+#kn=K, N=n, W=32
+
 foreach K {3} {
 foreach N {4 8 16} {
 foreach W {32} {

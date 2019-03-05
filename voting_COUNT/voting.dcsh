@@ -9,6 +9,8 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 analyze -format verilog {voting_BMR.v voting.v primitives.v}
 
+#no. of candidates, nc = 2^N, no. of voters, m = 2^M
+
 foreach N {2} {
 foreach M {2} {
 elaborate voting_BMR -architecture verilog -library DEFAULT -update -parameters $N,$M

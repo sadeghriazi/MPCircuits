@@ -1,17 +1,17 @@
-// module psi_BMR 
-// #
-// (
-// 	parameter W = 10, 
-// 	parameter N = 4
-// ) 
-// (
-// 	input [N*W-1:0] p_input,
-// 	output [W-1:0] o
-// );
+module psi_BMR 
+#
+(
+	parameter W = 10, 
+	parameter N = 4
+) 
+(
+	input [N*W-1:0] p_input,
+	output [W-1:0] o
+);
 
-// psi #(.N(N), .W(W)) psi_ (.all_input(p_input),.all_output(o));
+psi #(.N(N), .W(W)) psi_ (.all_input(p_input),.all_output(o));
 
-// endmodule
+endmodule
 
 module psi_BMR_4_104 
 #

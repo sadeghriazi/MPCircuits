@@ -1,4 +1,4 @@
-module voting #(parameter N = 2, M = 2)( //2**N candidates, 2**M voters
+module voting #(parameter N = 2, M = 2)( //no. of candidates, nc = 2^N, no. of voters, m = 2**M voters
 	input [(2**M)*N-1:0] vote,
 	output [N-1:0] winner	
 );
@@ -16,8 +16,9 @@ endfunction
 wire [N-1:0] V [2**M-1:0];
 genvar i;
 generate
-	for (i = 0; i < 2**M; i = i + 1)
-		assign V[i] = vote[(i+1)*N-1:i*N]; 
+	for (i = 0; i < 2**M; i = i + 1) begin:asn_vote
+		assign V[i] = vote[(i+1)*N-1:i*N];
+	end
 endgenerate
 
 genvar j, k;
@@ -28,9 +29,11 @@ wire [M:0] C [2**N-1:0];
 wire [2**M-1:0] dVt [2**N-1:0];
 
 generate
-	for (j=0; j<2**M; j=j+1)
-		for (k=0; k<2**N; k=k+1)
+	for (j=0; j<2**M; j=j+1) begin:asn_djvote
+		for (k=0; k<2**N; k=k+1) begin:asn_divote
 			assign dVt[k][j] = dV[j][k];
+		end
+	end
 endgenerate
 
 decoder #(.N(N)) decoder_(
@@ -81,8 +84,9 @@ endgenerate
 wire [(2**N)*(M+1)-1:0] bid;
 
 generate
-	for (i = 0; i < 2**N; i = i + 1)
+	for (i = 0; i < 2**N; i = i + 1)  begin:asn_bid
 		assign bid[(i+1)*(M+1)-1:i*(M+1)] = C[i]; 
+	end
 endgenerate
 
 auction #(.N(N), .W(M+1)) auction_(

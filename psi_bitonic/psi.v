@@ -87,7 +87,7 @@ module Dup
 
 endmodule
 
-module psi
+module psi //W=b, N=n, K=16
 	#(
 		parameter W = 2,   // bit width of each of the array elements
 		parameter K = 2,   // length of each array, must be even

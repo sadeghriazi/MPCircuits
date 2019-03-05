@@ -144,7 +144,7 @@ module knn
 
 endmodule
 
-module knn_comb
+module knn_comb //kn=K, N=n, W=32
 #(
 	parameter W = 8,  //bit width
 	parameter K = 2,  //number of nearest neighbors

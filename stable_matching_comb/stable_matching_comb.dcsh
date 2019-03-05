@@ -8,6 +8,7 @@ analyze -format verilog {../circuit_synthesis/syn_lib/FA.v ../circuit_synthesis/
 
 
 analyze -format verilog {stable_matching_comb_BMR.v stable_matching_comb.v encoder.v}
+#Ks == m, S == n/2
 
 foreach Ks {8} {
 foreach S {8} {

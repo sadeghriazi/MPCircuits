@@ -186,7 +186,7 @@ module stable_matching
 	
 endmodule
 
-module stable_matching_comb
+module stable_matching_comb //Kr = m, S = n/2
 #(
 	parameter Kr =10,   //number of preferences for list B
 	parameter Ks =10,   //number of preferences for list A
