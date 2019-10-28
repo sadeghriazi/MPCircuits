@@ -70,7 +70,19 @@ Go to the `bmr` directory.
 ```
 If arguments to both -n and -p are specified, the argument to -n is ignored.
 
+## Citation
+```
+@inproceedings{riazi2019mpcircuits,
+  title={MPCircuits: Optimized Circuit Generation for Secure Multi-Party Computation},
+  author={Riazi, M Sadegh and Javaheripi, Mojan and Hussain, Siam U and Koushanfar, Farinaz},
+  booktitle={2019 IEEE International Symposium on Hardware Oriented Security and Trust (HOST)},
+  pages={198--207},
+  year={2019},
+  organization={IEEE}
+}
+```
+
 ## References
 - Ben-Efraim, Aner, Yehuda Lindell, and Eran Omri. "Optimizing semi-honest secure multiparty computation for the internet." Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security. ACM, 2016. 
 
-
+- Riazi, M. Sadegh, Mojan Javaheripi, Siam U. Hussain, and Farinaz Koushanfar. "MPCircuits: Optimized Circuit Generation for Secure Multi-Party Computation." In 2019 IEEE International Symposium on Hardware Oriented Security and Trust (HOST), pp. 198-207. IEEE, 2019.
