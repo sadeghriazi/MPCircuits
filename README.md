@@ -71,6 +71,7 @@ Go to the `bmr` directory.
 If arguments to both -n and -p are specified, the argument to -n is ignored.
 
 ## Citation
+You can use the following information to cite our work:
 ```
 @inproceedings{riazi2019mpcircuits,
   title={MPCircuits: Optimized Circuit Generation for Secure Multi-Party Computation},
